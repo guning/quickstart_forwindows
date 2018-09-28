@@ -1,0 +1,30 @@
+#!python
+import os
+import ConfigParser
+import sys
+from multiprocessing import Process
+
+def get_command_from_config(config_file, command_argv):
+    if not os.path.exists(config_file):
+        print("config file not found")
+        os._exit(0)
+    cf = ConfigParser.ConfigParser()
+    cf.read(config_file)
+    return cf.get("alias", command_argv)
+
+def run_command(command):
+    os.system(command)
+
+config_file = "D:\\devenv\\quickstart\\command_alias.conf"
+if len(sys.argv) < 2:
+    os._exit(0)
+command_argv = sys.argv[1]
+alias_command = get_command_from_config(config_file, command_argv)
+if alias_command is not None:
+    run_command(alias_command)
+else:
+    print("command not found")
+
+os._exit(0)
+
+
