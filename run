@@ -26,5 +26,3 @@ else:
     print("command not found")
 
 os._exit(0)
-
-
